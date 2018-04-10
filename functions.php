@@ -31,6 +31,7 @@ function knns_dns_prefetch() {
 }
 add_action( 'wp_head', 'knns_dns_prefetch', 0 );
 
+// Google Analytics
 add_action( 'wp_head', function () { ?>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXX-X"></script>
@@ -79,12 +80,12 @@ function knns_facebook_pixel() {
 	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 	document,'script','https://connect.facebook.net/en_US/fbevents.js');
-	fbq('init', '1029765813796371');
+	fbq('init', 'XXXXXXXXXXXXXXXX');
 	fbq('track', 'PageView');
 	fbq('track', 'ViewContent');
 	</script>
 	<noscript><img height=\"1\" width=\"1\" style=\"display:none\"
-	src=\"https://www.facebook.com/tr?id=1029765813796371&ev=PageView&noscript=1\"
+	src=\"https://www.facebook.com/tr?id=XXXXXXXXXXXXXXXX&ev=PageView&noscript=1\"
 	/></noscript>
 	<!-- DO NOT MODIFY -->
 	<!-- End Facebook Pixel Code -->
