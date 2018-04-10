@@ -1,9 +1,9 @@
 <?php
 // Load styles from parent template
-function knn_enqueue_parent_theme_style() {
-	wp_enqueue_style( 'knn-parent-style', get_template_directory_uri() . '/style.css' );
+function knns_enqueue_parent_theme_style() {
+	wp_enqueue_style( 'knns-parent-style', get_template_directory_uri() . '/style.css' );
 }
-add_action( 'wp_enqueue_scripts', 'knn_enqueue_parent_theme_style', 99 );
+add_action( 'wp_enqueue_scripts', 'knns_enqueue_parent_theme_style', 99 );
 
 /* Adding DNS Prefetching */
 function knns_dns_prefetch() {
@@ -117,24 +117,24 @@ function remove_dashboard_widgets () {
 add_action( 'wp_dashboard_setup', 'remove_dashboard_widgets' );
 
 // Cookie Consent by Silktide - http://silktide.com/cookieconsent
-function knn_cookie_consent() {
+function knns_cookie_consent() {
 	wp_register_script(
-		'knn-cookie-consent-local',
+		'knns-cookie-consent-local',
 		get_stylesheet_directory_uri() . '/js/cookie-consent-local.js',
 		false,
 		'1.0',
 		true
 	);
-	wp_enqueue_script( 'knn-cookie-consent-local' );
+	wp_enqueue_script( 'knns-cookie-consent-local' );
 
 	wp_register_script(
-		'knn-cookie-consent-external',
+		'knns-cookie-consent-external',
 		'//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js',
 		false,
 		'2.0',
 		true
 	);
-	wp_enqueue_script( 'knn-cookie-consent-external' );
+	wp_enqueue_script( 'knns-cookie-consent-external' );
 }
-add_action( 'wp_enqueue_scripts', 'knn_cookie_consent' );
+add_action( 'wp_enqueue_scripts', 'knns_cookie_consent' );
 
