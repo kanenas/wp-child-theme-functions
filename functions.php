@@ -29,7 +29,7 @@ function knns_dns_prefetch() {
 				<link rel="dns-prefetch" href="//accounts.google.com" />
 				<link rel="dns-prefetch" href="//stackoverflow.com" />';
 }
-add_action('wp_head', 'knns_dns_prefetch', 0);
+add_action( 'wp_head', 'knns_dns_prefetch', 0 );
 
 add_action( 'wp_head', function () { ?>
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -53,19 +53,81 @@ function df_disable_comments_post_types_support() {
 				}
 	}
 }
-add_action('admin_init', 'df_disable_comments_post_types_support');
+add_action( 'admin_init', 'df_disable_comments_post_types_support' );
 
 // Close comments on the front-end
 function df_disable_comments_status() {
 	return false;
 }
-add_filter('comments_open', 'df_disable_comments_status', 20, 2);
-add_filter('pings_open', 'df_disable_comments_status', 20, 2);
+add_filter( 'comments_open', 'df_disable_comments_status', 20, 2 );
+add_filter( 'pings_open', 'df_disable_comments_status', 20, 2 );
 
 // Hide existing comments
 function df_disable_comments_hide_existing_comments($comments) {
 	$comments = array();
 	return $comments;
 }
-add_filter('comments_array', 'df_disable_comments_hide_existing_comments', 10, 2);
+add_filter( 'comments_array', 'df_disable_comments_hide_existing_comments', 10, 2 );
+
+// Add Facebook Pixel
+function knns_facebook_pixel() {
+	echo "
+	<!-- Facebook Pixel Code -->
+	<script>
+	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+	document,'script','https://connect.facebook.net/en_US/fbevents.js');
+	fbq('init', '1029765813796371');
+	fbq('track', 'PageView');
+	fbq('track', 'ViewContent');
+	</script>
+	<noscript><img height=\"1\" width=\"1\" style=\"display:none\"
+	src=\"https://www.facebook.com/tr?id=1029765813796371&ev=PageView&noscript=1\"
+	/></noscript>
+	<!-- DO NOT MODIFY -->
+	<!-- End Facebook Pixel Code -->
+	";
+}
+add_action( 'wp_head', 'knns_facebook_pixel' );
+
+// Remove dashboard widgets
+function remove_dashboard_widgets () {
+	remove_meta_box( 'dashboard_quick_press', 'dashboard', 'side' ); //Quick Press widget
+	remove_meta_box( 'dashboard_recent_drafts', 'dashboard', 'side' ); //Recent Drafts
+	remove_meta_box( 'dashboard_primary', 'dashboard', 'side' ); //WordPress.com Blog
+	remove_meta_box( 'dashboard_secondary', 'dashboard', 'side' ); //Other WordPress News
+	remove_meta_box( 'dashboard_incoming_links', 'dashboard', 'normal' ); //Incoming Links
+	remove_meta_box( 'dashboard_plugins', 'dashboard', 'normal' ); //Plugins
+	remove_meta_box( 'dashboard_right_now', 'dashboard', 'normal' ); //Right Now
+	//remove_meta_box( 'rg_forms_dashboard', 'dashboard', 'normal' ); //Gravity Forms
+	remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' ); //Recent Comments
+	//remove_meta_box( 'icl_dashboard_widget', 'dashboard', 'normal' ); //Multi Language Plugin
+	remove_meta_box( 'dashboard_activity', 'dashboard', 'normal' ); //Activity
+	remove_action( 'welcome_panel', 'wp_welcome_panel' );
+}
+add_action( 'wp_dashboard_setup', 'remove_dashboard_widgets' );
+
+// Cookie Consent by Silktide - http://silktide.com/cookieconsent
+function knn_cookie_consent() {
+	wp_register_script(
+		'knn-cookie-consent-local',
+		get_stylesheet_directory_uri() . '/js/cookie-consent-local.js',
+		false,
+		'1.0',
+		true
+	);
+	wp_enqueue_script( 'knn-cookie-consent-local' );
+
+	wp_register_script(
+		'knn-cookie-consent-external',
+		'//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js',
+		false,
+		'2.0',
+		true
+	);
+	wp_enqueue_script( 'knn-cookie-consent-external' );
+}
+add_action( 'wp_enqueue_scripts', 'knn_cookie_consent' );
 
