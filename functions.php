@@ -5,6 +5,12 @@ function knns_enqueue_parent_theme_style() {
 }
 add_action( 'wp_enqueue_scripts', 'knns_enqueue_parent_theme_style', 99 );
 
+// Google Fonts Enqueue
+function knns_add_google_fonts() {
+	wp_enqueue_style( 'knns-google-fonts', 'https://fonts.googleapis.com/css?family=Roboto+Condensed:300|Roboto:300&amp;subset=greek,greek-ext', false );
+}
+add_action( 'wp_enqueue_scripts', 'knns_add_google_fonts' );
+
 // Adding DNS Prefetching
 function knns_dns_prefetch() {
 	echo '<meta http-equiv="x-dns-prefetch-control" content="on">
