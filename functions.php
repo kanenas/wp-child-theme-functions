@@ -5,7 +5,7 @@ function knns_enqueue_parent_theme_style() {
 }
 add_action( 'wp_enqueue_scripts', 'knns_enqueue_parent_theme_style', 99 );
 
-/* Adding DNS Prefetching */
+// Adding DNS Prefetching
 function knns_dns_prefetch() {
 	echo '<meta http-equiv="x-dns-prefetch-control" content="on">
 				<link rel="dns-prefetch" href="//a.disquscdn.com" />
@@ -115,6 +115,20 @@ function remove_dashboard_widgets () {
 	remove_action( 'welcome_panel', 'wp_welcome_panel' );
 }
 add_action( 'wp_dashboard_setup', 'remove_dashboard_widgets' );
+
+// Disabling Feeds
+function knns_disable_feed() {
+	wp_die( __( 'No feed available, please visit the <a href="'. esc_url( home_url( '/' ) ) .'">homepage</a>!' ) );
+}
+add_action( 'do_feed', 'knns_disable_feed', 1 );
+add_action( 'do_feed_rdf', 'knns_disable_feed', 1 );
+add_action( 'do_feed_rss', 'knns_disable_feed', 1 );
+add_action( 'do_feed_rss2', 'knns_disable_feed', 1 );
+add_action( 'do_feed_atom', 'knns_disable_feed', 1 );
+add_action( 'do_feed_rss2_comments', 'knns_disable_feed', 1 );
+add_action( 'do_feed_atom_comments', 'knns_disable_feed', 1 );
+remove_action( 'wp_head', 'feed_links_extra', 3 );
+remove_action( 'wp_head', 'feed_links', 2 );
 
 // Cookie Consent by Silktide - http://silktide.com/cookieconsent
 function knns_cookie_consent() {
