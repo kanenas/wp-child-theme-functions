@@ -1,2 +1,2 @@
-# wp-child-theme-functions
-WordPress Child Theme (functions.php)
+# WordPress Child Theme (functions.php)
+Use these functions inside `/wp-content/themes/child-theme/functions.php`
