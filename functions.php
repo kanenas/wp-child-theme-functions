@@ -184,3 +184,20 @@ function idsearch( $wp ) {
 	$wp->query_vars['p'] = $id;
 }
 add_action( 'parse_request', 'idsearch' );
+
+// Add extra "Contact us" button next to "Add To Cart" in two languages
+add_action( 'woocommerce_after_add_to_cart_button', 'knns_custom_contact_us_link', 5 ); 
+function knns_custom_contact_us_link() {
+	$languages = icl_get_languages( 'skip_missing=1' );
+	if( 1 < count($languages) ) {
+		foreach( $languages as $l ) {
+			if ( $l['active'] ) {
+				if( $l['language_code'] === 'fr' ) {
+					echo '<a class="knns-custom-contact-us" href="/fr/contact" title="Contactez nous">Contactez nous</a>';
+				} else {
+					echo '<a class="knns-custom-contact-us" href="/contact" title="Contact us">Contact us</a>';
+				}
+			}
+		}
+	}
+}
