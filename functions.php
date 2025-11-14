@@ -82,6 +82,7 @@ function df_disable_comments_hide_existing_comments($comments) {
 }
 add_filter( 'comments_array', 'df_disable_comments_hide_existing_comments', 10, 2 );
 
+// Add Facebook domain verification meta tag
 function knns_facebook_domain_verification() {
 	echo "<meta name=\"facebook-domain-verification\" content=\"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\" />";
 }
